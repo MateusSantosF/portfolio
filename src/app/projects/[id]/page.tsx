@@ -16,6 +16,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { TechnologieIcon } from "@/features/projects/components/TechnologieIcon";
 import { IProject } from "@/features/projects/interfaces/IProject";
 import { personalData } from "@/shared/data/PersonalData";
+import { CategoryLabel } from "@/features/projects/components/CategoryLabel";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -83,8 +84,8 @@ export default async function ProjectDetails({ params }: Props) {
           <div className="flex  flex-wrap-reverse items-center gap-3 mb-4">
             <h1 className="text-3xl font-bold">{project.name}</h1>
             {project.category && (
-              <span className="text-xs text-neutral-500 border border-neutral-200 dark:border-neutral-800 px-2 py-1">
-                {project.category}
+              <span className="text-xs  border border-neutral-200 dark:border-neutral-800 px-2 py-1">
+                <CategoryLabel category={project.category} />
               </span>
             )}
             {project.isInternal && (
@@ -309,10 +310,10 @@ export default async function ProjectDetails({ params }: Props) {
         <div className="bg-neutral-50 dark:bg-neutral-800 px-6 flex justify-between flex-wrap lg:flex-nowrap py-3 border-b border-neutral-200 dark:border-neutral-700">
           <h2 className="font-bold">Galeria de Imagens</h2>
           {project.isInternal && (
-              <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100 px-2 py-1">
-                Projeto Interno
-              </span>
-            )}
+            <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100 px-2 py-1">
+              Projeto Interno
+            </span>
+          )}
         </div>
 
         <div className="p-6 bg-white dark:bg-neutral-900">

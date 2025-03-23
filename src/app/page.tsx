@@ -19,13 +19,13 @@ export default function Home() {
           <PersonalInfo />
         </section>
         <section className="bg-neutral-100 dark:bg-black p-8 md:p-16 flex flex-col justify-center">
-          <SectionDescription descripion="Projetos" />
+          <SectionDescription descripion="Destaques" />
           <ProjectsList
             onlyHighlighted
             className="grid grid-cols-1 gap-6"
             maxProjects={PREVIEW_LIST_SIZE}
           />
-          <SectionDescription descripion="Projetos" />
+          <SectionDescription descripion="Destaques" />
         </section>
       </div>
     </div>

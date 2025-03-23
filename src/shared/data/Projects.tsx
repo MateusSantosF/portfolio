@@ -3,46 +3,6 @@ import { IProject } from "../../features/projects/interfaces/IProject";
 
 export const projects: IProject[] = [
   {
-    id: "smac",
-    name: "SMAC",
-    shortDescription: "Sistema de Monitoramento e Avaliação da Cultura.",
-    isHighlighted: true,
-    isInternal: true,
-    fullDescription:
-      "O SMAC é uma plataforma desenvolvida para a Secretaria da Cultura do Estado de São Paulo com o objetivo de monitorar e avaliar projetos culturais geridos por Organizações Sociais. Ele centraliza indicadores, documentos e metas, permitindo uma gestão mais transparente, estratégica e eficaz das políticas públicas de cultura. Diante da complexidade dos contratos de gestão e do grande volume de documentos exigidos, o sistema promove a automatização, padronização e rastreabilidade dos fluxos, viabilizando o acompanhamento de resultados em tempo real e a tomada de decisões baseadas em dados.",
-    category: "PLATAFORM",
-    company: {
-      name: "BNP Soluções em TI",
-      url: "https://bnpsolucoes.com.br",
-      icon: '<Building2 className="w-5 h-5 text-blue-600" />',
-    },
-    role: "Desenvolvedor",
-    period: "Set 2023 - Fev 2024",
-    contributions: [
-      "Desenvolvimento completo do módulo de Recursos Humanos (RH)",
-      "Implementação do módulo de envio e controle de documentações obrigatórias",
-      "Desenvolvimento do backend para o módulo de plano orçamentário com lógica robusta de validação",
-      "Criação do sistema de permissionamento avançado com uso de GlobalFilters do EFCore",
-      "Implementação de um gerenciador de acesso dinâmico a nível de banco de dados",
-      "Aplicação de boas práticas de arquitetura com uso de Strategy Pattern para consolidação da prestação de contas",
-    ],
-    challenges:
-      "Lidar com a diversidade de regras de negócio relacionadas à mensuração de metas e consolidação de dados de prestação de contas foi um dos grandes desafios. Cada tipo de métrica possuía uma forma distinta de apuração e consolidação, exigindo um sistema flexível e escalável. Além disso, garantir segurança na manipulação dos dados e controle dinâmico de acessos com base em perfis institucionais exigiu uma modelagem cuidadosa e a aplicação de boas práticas com EFCore.",
-    solutions:
-      "Utilizei o design pattern Strategy para tratar regras de consolidação de métricas, permitindo que o sistema se adaptasse dinamicamente às necessidades específicas de cada contrato de gestão. Implementei um sistema de permissionamento inteligente com filtros globais no Entity Framework Core, aliado a um controle de acesso a nível de dados, garantindo segurança e isolamento de informações. Para o módulo de documentações obrigatórias, adicionei um sistema robusto de logging e rastreamento, garantindo auditoria completa sobre envios e modificações.",
-    technologies: ["TYPESCRIPT", ".NET", "SQLSERVER", "NEXTJS"],
-    images: [
-      {
-        title: "Area de login",
-        url: "/assets/smac-1.png",
-      },
-      {
-        title: "Listagem de contratos",
-        url: "/assets/smac-2.png",
-      },
-    ],
-  },
-  {
     id: "agenda-viva-sp",
     name: "Agenda Viva SP",
     isHighlighted: true,
@@ -88,6 +48,7 @@ export const projects: IProject[] = [
   {
     id: "turistic-guide-ai",
     name: "Guia Turístico AI",
+    isHighlighted: true,
     shortDescription:
       "Chatbot inteligente com GPT-4 e RAG para recomendação de eventos culturais personalizados.",
     fullDescription:
@@ -338,6 +299,46 @@ export const projects: IProject[] = [
       {
         title: "Configurando o Widget",
         url: "/assets/milvus-widget-2.png",
+      },
+    ],
+  },
+  {
+    id: "smac",
+    name: "SMAC",
+    shortDescription: "Sistema de Monitoramento e Avaliação da Cultura.",
+    isHighlighted: true,
+    isInternal: true,
+    fullDescription:
+      "O SMAC é uma plataforma desenvolvida para a Secretaria da Cultura do Estado de São Paulo com o objetivo de monitorar e avaliar projetos culturais geridos por Organizações Sociais. Ele centraliza indicadores, documentos e metas, permitindo uma gestão mais transparente, estratégica e eficaz das políticas públicas de cultura. Diante da complexidade dos contratos de gestão e do grande volume de documentos exigidos, o sistema promove a automatização, padronização e rastreabilidade dos fluxos, viabilizando o acompanhamento de resultados em tempo real e a tomada de decisões baseadas em dados.",
+    category: "PLATAFORM",
+    company: {
+      name: "BNP Soluções em TI",
+      url: "https://bnpsolucoes.com.br",
+      icon: '<Building2 className="w-5 h-5 text-blue-600" />',
+    },
+    role: "Desenvolvedor",
+    period: "Set 2023 - Fev 2024",
+    contributions: [
+      "Desenvolvimento completo do módulo de Recursos Humanos (RH)",
+      "Implementação do módulo de envio e controle de documentações obrigatórias",
+      "Desenvolvimento do backend para o módulo de plano orçamentário com lógica robusta de validação",
+      "Criação do sistema de permissionamento avançado com uso de GlobalFilters do EFCore",
+      "Implementação de um gerenciador de acesso dinâmico a nível de banco de dados",
+      "Aplicação de boas práticas de arquitetura com uso de Strategy Pattern para consolidação da prestação de contas",
+    ],
+    challenges:
+      "Lidar com a diversidade de regras de negócio relacionadas à mensuração de metas e consolidação de dados de prestação de contas foi um dos grandes desafios. Cada tipo de métrica possuía uma forma distinta de apuração e consolidação, exigindo um sistema flexível e escalável. Além disso, garantir segurança na manipulação dos dados e controle dinâmico de acessos com base em perfis institucionais exigiu uma modelagem cuidadosa e a aplicação de boas práticas com EFCore.",
+    solutions:
+      "Utilizei o design pattern Strategy para tratar regras de consolidação de métricas, permitindo que o sistema se adaptasse dinamicamente às necessidades específicas de cada contrato de gestão. Implementei um sistema de permissionamento inteligente com filtros globais no Entity Framework Core, aliado a um controle de acesso a nível de dados, garantindo segurança e isolamento de informações. Para o módulo de documentações obrigatórias, adicionei um sistema robusto de logging e rastreamento, garantindo auditoria completa sobre envios e modificações.",
+    technologies: ["TYPESCRIPT", ".NET", "SQLSERVER", "NEXTJS"],
+    images: [
+      {
+        title: "Area de login",
+        url: "/assets/smac-1.png",
+      },
+      {
+        title: "Listagem de contratos",
+        url: "/assets/smac-2.png",
       },
     ],
   },
