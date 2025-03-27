@@ -127,54 +127,54 @@ export const projects: IProject[] = [
       },
     ],
   },
-  // {
-  //   id: "vitrine-projetos",
-  //   name: "Vitrine de Projetos",
-  //   isHighlighted: true,
-  //   shortDescription:
-  //     "A plataforma que potencializa projetos culturais do ProAC ICMS, conectando quem cria a quem apoia.",
-  //   fullDescription:
-  //     "A Vitrine de Projetos é uma plataforma centralizada que conecta proponentes culturais e investidores, facilitando a captação de recursos por meio de transparência, visibilidade e tecnologia otimizada. A plataforma oferece listagem de projetos, busca avançada, perfis de proponentes e dados atualizados, garantindo alta acessibilidade e SEO otimizado. Integra dados extraídos do sistema FasePRO do programa ProAC ICMS.",
-  //   category: "PLATAFORM",
-  //   url: "https://vitrinedeprojetos.cultura.sp.gov.br",
-  //   company: {
-  //     name: "BNP Soluções em TI",
-  //     url: "https://bnpsolucoes.com.br",
-  //     icon: <Building2 className="w-5 h-5 text-blue-600" />,
-  //   },
-  //   role: "Tech Lead e Desenvolvedor",
-  //   images: [
-  //     {
-  //       title: "Tela Inicial",
-  //       url: "/assets/vitrine-de-projetos-1.png",
-  //     },
-  //     {
-  //       title: "Listagem de projetos",
-  //       url: "/assets/vitrine-de-projetos-2.png",
-  //     },
-  //   ],
-  //   technologies: [
-  //     "NEXTJS",
-  //     "SQLSERVER",
-  //     "PRISMA",
-  //     "SHADCNUI",
-  //     "TAILWIND",
-  //     "SQLSERVER",
-  //   ],
-  //   period: "Dez 2024 - Presente",
-  //   contributions: [
-  //     "Definição da arquitetura da aplicação e tecnologias utilizadas",
-  //     "Desenvolvimento completo da plataforma",
-  //     "Padronização e modelagem de dados integrando fontes não relacionais com banco relacional (SQL Server)",
-  //     "Criação da proposta visual e implementação do design com alta usabilidade",
-  //     "Aplicação de boas práticas de SEO e acessibilidade",
-  //     "Integração com Google Analytics para rastreamento de acesso e impacto",
-  //   ],
-  //   challenges:
-  //     "O maior desafio foi transformar dados vindos de um banco não relacional (do sistema FasePRO) em uma estrutura relacional adequada para consumo via Prisma/SQL Server, garantindo integridade e performance. Outro ponto crítico foi atingir um alto nível de SEO e acessibilidade, uma exigência essencial para aumentar a visibilidade pública dos projetos culturais e cumprir o objetivo da plataforma: conectar criadores a patrocinadores.",
-  //   solutions:
-  //     "Foi estruturado um processo de transformação e padronização de dados, garantindo que a informação dos projetos fosse exposta de maneira clara e performática. No frontend, a aplicação foi construída com Next.js, utilizando rendering server-side para maximizar indexação por mecanismos de busca. Adotamos também componentes acessíveis com Shadcn UI, TailwindCSS e práticas modernas de otimização, garantindo performance e acessibilidade para todos os usuários.",
-  // },
+  {
+    id: "vitrine-projetos",
+    name: "Vitrine de Projetos",
+    isHighlighted: true,
+    shortDescription:
+      "A plataforma que potencializa projetos culturais do ProAC ICMS, conectando quem cria a quem apoia.",
+    fullDescription:
+      "A Vitrine de Projetos é uma plataforma centralizada que conecta proponentes culturais e investidores, facilitando a captação de recursos por meio de transparência, visibilidade e tecnologia otimizada. A plataforma oferece listagem de projetos, busca avançada, perfis de proponentes e dados atualizados, garantindo alta acessibilidade e SEO otimizado. Integra dados extraídos do sistema FasePRO do programa ProAC ICMS.",
+    category: "PLATAFORM",
+    url: "https://vitrinedeprojetos.cultura.sp.gov.br",
+    company: {
+      name: "BNP Soluções em TI",
+      url: "https://bnpsolucoes.com.br",
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+    role: "Tech Lead e Desenvolvedor",
+    images: [
+      {
+        title: "Tela Inicial",
+        url: "/assets/vitrine-de-projetos-1.png",
+      },
+      {
+        title: "Listagem de projetos",
+        url: "/assets/vitrine-de-projetos-2.png",
+      },
+    ],
+    technologies: [
+      "NEXTJS",
+      "SQLSERVER",
+      "PRISMA",
+      "SHADCNUI",
+      "TAILWIND",
+      "SQLSERVER",
+    ],
+    period: "Dez 2024 - Presente",
+    contributions: [
+      "Definição da arquitetura da aplicação e tecnologias utilizadas",
+      "Desenvolvimento completo da plataforma",
+      "Padronização e modelagem de dados integrando fontes não relacionais com banco relacional (SQL Server)",
+      "Criação da proposta visual e implementação do design com alta usabilidade",
+      "Aplicação de boas práticas de SEO e acessibilidade",
+      "Integração com Google Analytics para rastreamento de acesso e impacto",
+    ],
+    challenges:
+      "O maior desafio foi transformar dados vindos de um banco não relacional (do sistema FasePRO) em uma estrutura relacional adequada para consumo via Prisma/SQL Server, garantindo integridade e performance. Outro ponto crítico foi atingir um alto nível de SEO e acessibilidade, uma exigência essencial para aumentar a visibilidade pública dos projetos culturais e cumprir o objetivo da plataforma: conectar criadores a patrocinadores.",
+    solutions:
+      "Foi estruturado um processo de transformação e padronização de dados, garantindo que a informação dos projetos fosse exposta de maneira clara e performática. No frontend, a aplicação foi construída com Next.js, utilizando rendering server-side para maximizar indexação por mecanismos de busca. Adotamos também componentes acessíveis com Shadcn UI, TailwindCSS e práticas modernas de otimização, garantindo performance e acessibilidade para todos os usuários.",
+  },
   {
     id: "vitrine-cidades",
     name: "Vitrine de Cidades",
