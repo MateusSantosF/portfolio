@@ -38,7 +38,7 @@ export async function generateMetadata(
 /** Linha rótulo/valor usada no bloco de metadados do case. */
 function MetaRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex justify-between gap-3 border-b border-rule py-3.5 text-sm">
+    <div className="flex justify-between gap-3 border-b border-rule py-4 text-[15px]">
       <span className="text-ink-faint">{label}</span>
       <span className="text-right">{value}</span>
     </div>
@@ -51,13 +51,13 @@ export default async function ProjectDetails({ params }: Props) {
 
   if (!project) {
     return (
-      <div className="animate-fade gutter flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
+      <div className="animate-fade shell flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
         <h1 className="text-[clamp(24px,4vw,32px)] font-medium tracking-[-0.025em]">
           Projeto não encontrado
         </h1>
         <Link
           href="/projects"
-          className="text-sm text-ink-faint transition-colors hover:text-ink"
+          className="text-[15px] text-ink-faint transition-colors hover:text-ink"
         >
           ← Projetos
         </Link>
@@ -68,10 +68,10 @@ export default async function ProjectDetails({ params }: Props) {
   const { label: categoryLabel } = CategoriesMap[project.category];
 
   return (
-    <article className="animate-fade gutter pb-[clamp(64px,12vh,120px)] pt-[clamp(28px,5vh,56px)]">
+    <article className="animate-fade shell pb-[clamp(64px,12vh,120px)] pt-[clamp(28px,5vh,56px)]">
       <Link
         href="/projects"
-        className="inline-block pb-[clamp(28px,5vw,44px)] text-sm text-ink-faint transition-colors hover:text-ink"
+        className="inline-block pb-[clamp(28px,5vw,44px)] text-[15px] text-ink-faint transition-colors hover:text-ink"
       >
         ← Projetos
       </Link>
@@ -103,7 +103,7 @@ export default async function ProjectDetails({ params }: Props) {
             href={project.url}
             target="_blank"
             rel="noreferrer"
-            className="rounded-control bg-ink px-5 py-3 text-[15px] font-medium text-white transition-colors hover:bg-accent"
+            className="rounded-control bg-ink px-5 py-3 text-base font-medium text-white transition-colors hover:bg-accent"
           >
             Visitar plataforma
           </a>
@@ -113,7 +113,7 @@ export default async function ProjectDetails({ params }: Props) {
             href={project.github}
             target="_blank"
             rel="noreferrer"
-            className="rounded-control border border-rule-strong px-5 py-3 text-[15px] font-medium transition-colors hover:border-ink"
+            className="rounded-control border border-rule-strong px-5 py-3 text-base font-medium transition-colors hover:border-ink"
           >
             Código
           </a>
@@ -124,7 +124,7 @@ export default async function ProjectDetails({ params }: Props) {
             return (
               <span
                 key={`${tech}-${i}`}
-                className="flex items-center gap-2 text-[13px] text-ink-soft"
+                className="flex items-center gap-2 text-sm text-ink-soft"
               >
                 <span className="block opacity-55">
                   {cloneElement(
@@ -140,7 +140,7 @@ export default async function ProjectDetails({ params }: Props) {
       </div>
 
       {/* Contexto */}
-      <p className="mb-[clamp(36px,7vw,64px)] max-w-[46em] text-base leading-[1.7] text-ink-body">
+      <p className="mb-[clamp(36px,7vw,64px)] max-w-[46em] text-[17px] leading-[1.75] text-ink-body">
         {project.fullDescription}
       </p>
 
@@ -149,20 +149,20 @@ export default async function ProjectDetails({ params }: Props) {
         <div className="mb-[clamp(36px,7vw,64px)] grid gap-[clamp(28px,5vw,64px)] [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
           {project.challenges && (
             <section className="flex flex-col gap-3">
-              <h2 className="font-mono text-[11px] font-normal text-ink-faint">
+              <h2 className="text-[clamp(19px,2.6vw,22px)] font-medium tracking-[-0.02em]">
                 O problema
               </h2>
-              <p className="text-base leading-[1.7] text-ink-body">
+              <p className="text-[17px] leading-[1.75] text-ink-body">
                 {project.challenges}
               </p>
             </section>
           )}
           {project.solutions && (
             <section className="flex flex-col gap-3">
-              <h2 className="font-mono text-[11px] font-normal text-ink-faint">
+              <h2 className="text-[clamp(19px,2.6vw,22px)] font-medium tracking-[-0.02em]">
                 A solução
               </h2>
-              <p className="text-base leading-[1.7] text-ink-body">
+              <p className="text-[17px] leading-[1.75] text-ink-body">
                 {project.solutions}
               </p>
             </section>
@@ -173,13 +173,13 @@ export default async function ProjectDetails({ params }: Props) {
       {/* Entregas */}
       {project.contributions && project.contributions.length > 0 && (
         <section className="mb-[clamp(36px,7vw,64px)]">
-          <h2 className="mb-4 font-mono text-[11px] font-normal text-ink-faint">
+          <h2 className="mb-5 text-[clamp(19px,2.6vw,22px)] font-medium tracking-[-0.02em]">
             Entregas
           </h2>
           <div className="grid gap-px overflow-hidden rounded-panel border border-rule bg-rule [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">
             {project.contributions.map((item, i) => (
               <div key={i} className="flex bg-surface p-6">
-                <p className="text-[15px] leading-[1.6] text-ink-body">
+                <p className="text-base leading-[1.65] text-ink-body">
                   {item}
                 </p>
               </div>
@@ -227,7 +227,7 @@ export default async function ProjectDetails({ params }: Props) {
         </span>
         <a
           href={`mailto:${personalData.email}`}
-          className="rounded-control bg-ink px-5 py-3 text-[15px] font-medium text-white transition-colors hover:bg-accent"
+          className="rounded-control bg-ink px-5 py-3 text-base font-medium text-white transition-colors hover:bg-accent"
         >
           Falar comigo
         </a>

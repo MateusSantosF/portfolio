@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div className="animate-fade">
       {/* Hero */}
-      <section className="gutter pb-[clamp(48px,9vh,100px)] pt-[clamp(56px,12vh,140px)]">
+      <section className="shell pb-[clamp(48px,9vh,100px)] pt-[clamp(56px,12vh,140px)]">
         <div className="flex max-w-[900px] flex-col gap-[clamp(24px,4vw,36px)]">
           <p className="font-mono text-xs text-ink-faint">
             Tech Lead · Full stack · São Paulo
@@ -44,7 +44,7 @@ export default function Home() {
             Projeto e construo plataformas digitais de longa vida — da
             arquitetura ao código em produção.
           </h1>
-          <p className="max-w-[34em] text-pretty text-[clamp(16px,2.2vw,19px)] leading-[1.6] text-ink-muted">
+          <p className="max-w-[34em] text-pretty text-[clamp(17px,2.3vw,20px)] leading-[1.65] text-ink-muted">
             Sou {personalData.name}. Lidero tecnicamente as plataformas
             culturais do Governo do Estado de São Paulo na{" "}
             {personalData.currentCompany}, e desenvolvo soluções de IA aplicadas
@@ -53,13 +53,13 @@ export default function Home() {
           <div className="mt-1 flex flex-wrap gap-2.5">
             <Link
               href="/projects"
-              className="rounded-control bg-ink px-5 py-3 text-[15px] font-medium text-white transition-colors hover:bg-accent"
+              className="rounded-control bg-ink px-5 py-3 text-base font-medium text-white transition-colors hover:bg-accent"
             >
               Ver projetos
             </Link>
             <a
               href={`mailto:${personalData.email}`}
-              className="rounded-control border border-rule-strong px-5 py-3 text-[15px] font-medium text-ink transition-colors hover:border-ink"
+              className="rounded-control border border-rule-strong px-5 py-3 text-base font-medium text-ink transition-colors hover:border-ink"
             >
               Falar sobre um projeto
             </a>
@@ -68,9 +68,9 @@ export default function Home() {
       </section>
 
       {/* Stack */}
-      <section className="gutter pb-[clamp(48px,9vh,96px)]">
+      <section className="shell pb-[clamp(48px,9vh,96px)]">
         <div className="flex flex-wrap items-center gap-[clamp(18px,3vw,34px)] border-t border-rule pt-7">
-          <span className="mb-1 w-full font-mono text-[11px] text-ink-faint">
+          <span className="mb-1 w-full font-mono text-xs text-ink-faint">
             Stack principal
           </span>
           {STACK.map((tech) => {
@@ -78,7 +78,7 @@ export default function Home() {
             return (
               <span
                 key={tech}
-                className="flex items-center gap-2 text-[13px] text-ink-soft"
+                className="flex items-center gap-2 text-sm text-ink-soft"
               >
                 <span className="block opacity-55">
                   {cloneElement(
@@ -94,14 +94,14 @@ export default function Home() {
       </section>
 
       {/* Trabalho selecionado */}
-      <section className="gutter pb-[clamp(56px,10vh,112px)]">
+      <section className="shell pb-[clamp(56px,10vh,112px)]">
         <div className="flex items-baseline justify-between gap-5 border-b border-rule pb-5">
-          <h2 className="text-[clamp(20px,3vw,24px)] font-medium tracking-[-0.02em]">
+          <h2 className="text-[clamp(22px,3.2vw,27px)] font-medium tracking-[-0.02em]">
             Trabalho selecionado
           </h2>
           <Link
             href="/projects"
-            className="text-sm text-ink-soft transition-colors hover:text-ink"
+            className="text-[15px] text-ink-soft transition-colors hover:text-ink"
           >
             Todos ({projects.length})
           </Link>
@@ -114,13 +114,13 @@ export default function Home() {
       </section>
 
       {/* Contato */}
-      <section className="gutter pb-[clamp(64px,12vh,128px)]">
+      <section className="shell pb-[clamp(64px,12vh,128px)]">
         <div className="grid gap-[clamp(28px,5vw,56px)] border-t border-rule pt-[clamp(32px,6vw,48px)] [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">
           <div className="flex max-w-[30em] flex-col gap-3">
             <h2 className="text-[clamp(22px,3.4vw,28px)] font-medium tracking-[-0.025em]">
               Disponível para novos projetos
             </h2>
-            <p className="text-base leading-[1.6] text-ink-muted">
+            <p className="text-[17px] leading-[1.65] text-ink-muted">
               Consultoria técnica, desenvolvimento de plataformas ou produtos
               com IA. Respondo em até 24h.
             </p>
@@ -128,7 +128,7 @@ export default function Home() {
           <div className="flex flex-col gap-0.5">
             <a
               href={`mailto:${personalData.email}`}
-              className="flex justify-between gap-4 border-b border-rule py-3.5 text-[15px] transition-colors hover:text-accent"
+              className="flex justify-between gap-4 border-b border-rule py-4 text-base transition-colors hover:text-accent"
             >
               <span>E-mail</span>
               <span className="text-ink-faint">mateusferreira.dev</span>
@@ -137,7 +137,7 @@ export default function Home() {
               href={`https://www.linkedin.com/in/${personalData.linkedin}`}
               target="_blank"
               rel="noreferrer"
-              className="flex justify-between gap-4 border-b border-rule py-3.5 text-[15px] transition-colors hover:text-accent"
+              className="flex justify-between gap-4 border-b border-rule py-4 text-base transition-colors hover:text-accent"
             >
               <span>LinkedIn</span>
               <span className="text-ink-faint">{personalData.linkedin}</span>
@@ -146,7 +146,7 @@ export default function Home() {
               href={`https://github.com/${personalData.github}`}
               target="_blank"
               rel="noreferrer"
-              className="flex justify-between gap-4 border-b border-rule py-3.5 text-[15px] transition-colors hover:text-accent"
+              className="flex justify-between gap-4 border-b border-rule py-4 text-base transition-colors hover:text-accent"
             >
               <span>GitHub</span>
               <span className="text-ink-faint">{personalData.github}</span>

@@ -38,7 +38,7 @@ export default function ProjectsBrowser({
               type="button"
               onClick={() => setFilter(label)}
               aria-pressed={active}
-              className={`rounded-full border px-3.5 py-2 text-[13px] transition-colors hover:border-ink ${
+              className={`rounded-full border px-4 py-2 text-sm transition-colors hover:border-ink ${
                 active
                   ? "border-ink bg-ink text-white"
                   : "border-rule-strong bg-surface text-ink-muted"
@@ -51,13 +51,8 @@ export default function ProjectsBrowser({
       </div>
 
       <div className="flex flex-col">
-        {visible.map((project, i) => (
-          <ProjectRow
-            key={project.id}
-            project={project}
-            index={i + 1}
-            rule="top"
-          />
+        {visible.map((project) => (
+          <ProjectRow key={project.id} project={project} rule="top" />
         ))}
       </div>
       <div className="border-t border-rule" />
