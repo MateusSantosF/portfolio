@@ -1,26 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  Globe,
-  Github,
-  Briefcase,
-  Calendar,
-  LightbulbIcon,
-  WrenchIcon,
-  CheckCircle,
-  Building2,
-} from "lucide-react";
-import { projects } from "@/shared/data/Projects";
+import { cloneElement } from "react";
 import { Metadata, ResolvingMetadata } from "next";
-import { TechnologieIcon } from "@/features/projects/components/TechnologieIcon";
-import { IProject } from "@/features/projects/interfaces/IProject";
+
+import { projects } from "@/shared/data/Projects";
 import { personalData } from "@/shared/data/PersonalData";
-import { CategoryLabel } from "@/features/projects/components/CategoryLabel";
+import { IProject } from "@/features/projects/interfaces/IProject";
+import { CategoriesMap } from "@/features/projects/data/Categories";
+import { TechnologiesMap } from "@/features/projects/data/Technologies";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
+
 export async function generateMetadata(
   { params }: Props,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -30,9 +22,7 @@ export async function generateMetadata(
 
   const project: IProject | undefined = projects.find((p) => p.id === id);
   if (!project) {
-    return {
-      title: "Projeto não encontrado",
-    };
+    return { title: "Projeto não encontrado" };
   }
   const imagesUrl = project.images.map((image) => image.url);
   return {
@@ -41,10 +31,18 @@ export async function generateMetadata(
     keywords: personalData.SEOKeywords.concat(project.technologies)
       .concat(project.category)
       .concat(project.name),
-    openGraph: {
-      images: imagesUrl,
-    },
+    openGraph: { images: imagesUrl },
   };
+}
+
+/** Linha rótulo/valor usada no bloco de metadados do case. */
+function MetaRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between gap-3 border-b border-rule py-3.5 text-sm">
+      <span className="text-ink-faint">{label}</span>
+      <span className="text-right">{value}</span>
+    </div>
+  );
 }
 
 export default async function ProjectDetails({ params }: Props) {
@@ -53,300 +51,187 @@ export default async function ProjectDetails({ params }: Props) {
 
   if (!project) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-xl font-bold mb-4">Projeto não encontrado</h2>
-          <Link
-            href="/projects"
-            className="text-sm text-neutral-500 hover:text-foreground flex items-center justify-center gap-2"
-          >
-            <ArrowLeft size={16} />
-            Voltar para projetos
-          </Link>
-        </div>
+      <div className="animate-fade gutter flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
+        <h1 className="text-[clamp(24px,4vw,32px)] font-medium tracking-[-0.025em]">
+          Projeto não encontrado
+        </h1>
+        <Link
+          href="/projects"
+          className="text-sm text-ink-faint transition-colors hover:text-ink"
+        >
+          ← Projetos
+        </Link>
       </div>
     );
   }
 
+  const { label: categoryLabel } = CategoriesMap[project.category];
+
   return (
-    <div className="container mx-auto px-4 py-16 max-w-5xl">
+    <article className="animate-fade gutter pb-[clamp(64px,12vh,120px)] pt-[clamp(28px,5vh,56px)]">
       <Link
         href="/projects"
-        className="text-sm text-neutral-500 hover:text-foreground flex items-center gap-2 mb-8"
+        className="inline-block pb-[clamp(28px,5vw,44px)] text-sm text-ink-faint transition-colors hover:text-ink"
       >
-        <ArrowLeft size={16} />
-        Voltar para projetos
+        ← Projetos
       </Link>
 
-      {/* Cabeçalho do Projeto */}
-      <div className="mb-8">
-        <div className="flex justify-between gap-6 items-start flex-wrap lg:flex-nowrap">
-          <div className="flex  flex-wrap-reverse items-center gap-3 mb-4">
-            <h1 className="text-3xl font-bold">{project.name}</h1>
-            {project.category && (
-              <span className="text-xs  border border-neutral-200 dark:border-neutral-800 px-2 py-1">
-                <CategoryLabel category={project.category} />
-              </span>
-            )}
-            {project.isInternal && (
-              <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100 px-2 py-1">
-                Projeto Interno
-              </span>
-            )}
-          </div>
-          <div className="flex justify-center w-full lg:w-fit">
-            {/* Links externos */}
-            {!project.isInternal && (
-              <div className="flex flex-wrap gap-4 mb-10">
-                {project.url && project.url !== "#" && (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 border border-neutral-200 dark:border-neutral-800 px-4 py-2 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors rounded-md"
-                  >
-                    <Globe size={16} />
-                    <span className="text-sm">Visitar site</span>
-                  </a>
-                )}
-
-                {project.github && project.github !== "#" && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 border border-neutral-200 dark:border-neutral-800 px-4 py-2 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors rounded-md"
-                  >
-                    <Github size={16} />
-                    <span className="text-sm">Ver código</span>
-                  </a>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        <p className="text-neutral-600 dark:text-neutral-400">
+      {/* Cabeçalho */}
+      <header className="flex max-w-[46em] flex-col gap-[18px]">
+        <p className="font-mono text-xs text-ink-faint">{categoryLabel}</p>
+        <h1 className="text-[clamp(30px,6vw,48px)] font-medium leading-[1.08] tracking-[-0.035em]">
+          {project.name}
+        </h1>
+        <p className="text-[clamp(17px,2.4vw,20px)] leading-[1.55] text-ink-muted">
           {project.shortDescription}
         </p>
+      </header>
+
+      {/* Metadados */}
+      <div className="my-[clamp(32px,6vw,52px)] grid gap-x-[clamp(24px,4vw,48px)] [grid-template-columns:repeat(auto-fit,minmax(180px,1fr))]">
+        {project.company && (
+          <MetaRow label="Cliente" value={project.company.name} />
+        )}
+        {project.role && <MetaRow label="Papel" value={project.role} />}
+        <MetaRow label="Período" value={project.period} />
       </div>
 
-      {/* Seção: Meu Papel no Projeto */}
-      <section className="mb-10 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
-        <div className="bg-neutral-50 dark:bg-neutral-800 px-6 py-3 border-b border-neutral-200 dark:border-neutral-700">
-          <h2 className="font-bold">Meu Papel no Projeto</h2>
+      {/* Links e stack */}
+      <div className="mb-[clamp(36px,7vw,64px)] flex flex-wrap items-center gap-x-6 gap-y-4 border-b border-rule pb-[clamp(28px,5vw,44px)]">
+        {project.url && project.url !== "#" && !project.isInternal && (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-control bg-ink px-5 py-3 text-[15px] font-medium text-white transition-colors hover:bg-accent"
+          >
+            Visitar plataforma
+          </a>
+        )}
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-control border border-rule-strong px-5 py-3 text-[15px] font-medium transition-colors hover:border-ink"
+          >
+            Código
+          </a>
+        )}
+        <div className="flex flex-wrap items-center gap-4">
+          {project.technologies.map((tech, i) => {
+            const { icon, name } = TechnologiesMap[tech];
+            return (
+              <span
+                key={`${tech}-${i}`}
+                className="flex items-center gap-2 text-[13px] text-ink-soft"
+              >
+                <span className="block opacity-55">
+                  {cloneElement(
+                    icon.source as React.ReactElement<{ size?: number }>,
+                    { size: 15 }
+                  )}
+                </span>
+                {name}
+              </span>
+            );
+          })}
         </div>
+      </div>
 
-        <div className="p-6 bg-white dark:bg-neutral-900">
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Empresa */}
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 rounded-full shrink-0">
-                <Building2 className="w-5 h-5 text-blue-500" />
-              </div>
-              <div>
-                <h3 className="font-medium text-sm text-neutral-500">
-                  Empresa
-                </h3>
-                {project.company?.url !== "#" ? (
-                  <a
-                    href={project.company?.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground hover:underline"
-                  >
-                    {project.company?.name}
-                  </a>
-                ) : (
-                  <span className="text-foreground">
-                    {project.company?.name}
-                  </span>
-                )}
-              </div>
-            </div>
+      {/* Contexto */}
+      <p className="mb-[clamp(36px,7vw,64px)] max-w-[46em] text-base leading-[1.7] text-ink-body">
+        {project.fullDescription}
+      </p>
 
-            {/* Cargo */}
-            {project.role && (
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 rounded-full shrink-0">
-                  <Briefcase className="w-5 h-5 text-neutral-500" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm text-neutral-500">
-                    Cargo
-                  </h3>
-                  <span className="text-foreground">{project.role}</span>
-                </div>
-              </div>
-            )}
-
-            {/* Período */}
-            {project.period && (
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 flex items-center justify-center bg-neutral-100 dark:bg-neutral-800 rounded-full shrink-0">
-                  <Calendar className="w-5 h-5 text-neutral-500" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm text-neutral-500">
-                    Período
-                  </h3>
-                  <span className="text-foreground">{project.period}</span>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Seção: Resumo do Projeto */}
-      <section className="mb-10 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
-        <div className="bg-neutral-50 dark:bg-neutral-800 px-6 py-3 border-b border-neutral-200 dark:border-neutral-700">
-          <h2 className="font-bold">Resumo do Projeto</h2>
-        </div>
-
-        <div className="p-6 bg-white dark:bg-neutral-900">
-          {project.isInternal ? (
-            <div className="space-y-4">
-              <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                {project.fullDescription}
+      {/* Problema / solução */}
+      {(project.challenges || project.solutions) && (
+        <div className="mb-[clamp(36px,7vw,64px)] grid gap-[clamp(28px,5vw,64px)] [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
+          {project.challenges && (
+            <section className="flex flex-col gap-3">
+              <h2 className="font-mono text-[11px] font-normal text-ink-faint">
+                O problema
+              </h2>
+              <p className="text-base leading-[1.7] text-ink-body">
+                {project.challenges}
               </p>
-              <div className="p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-900 rounded-md">
-                <p className="text-amber-800 dark:text-amber-200 text-sm">
-                  Este é um projeto interno por isso suas informações são
-                  limitadas. Para mais detalhes, entre em contato diretamente
-                  com a empresa responsável.
+            </section>
+          )}
+          {project.solutions && (
+            <section className="flex flex-col gap-3">
+              <h2 className="font-mono text-[11px] font-normal text-ink-faint">
+                A solução
+              </h2>
+              <p className="text-base leading-[1.7] text-ink-body">
+                {project.solutions}
+              </p>
+            </section>
+          )}
+        </div>
+      )}
+
+      {/* Entregas */}
+      {project.contributions && project.contributions.length > 0 && (
+        <section className="mb-[clamp(36px,7vw,64px)]">
+          <h2 className="mb-4 font-mono text-[11px] font-normal text-ink-faint">
+            Entregas
+          </h2>
+          <div className="grid gap-px overflow-hidden rounded-panel border border-rule bg-rule [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">
+            {project.contributions.map((item, i) => (
+              <div key={i} className="flex bg-surface p-6">
+                <p className="text-[15px] leading-[1.6] text-ink-body">
+                  {item}
                 </p>
               </div>
-            </div>
-          ) : (
-            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              {project.fullDescription}
-            </p>
-          )}
-        </div>
-      </section>
-
-      {/* Seção: Minhas Contribuições */}
-      {project.contributions && project.contributions.length > 0 && (
-        <section className="mb-10 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
-          <div className="bg-neutral-50 dark:bg-neutral-800 px-6 py-3 border-b border-neutral-200 dark:border-neutral-700">
-            <h2 className="font-bold">Minhas Contribuições</h2>
-          </div>
-
-          <div className="p-6 bg-white dark:bg-neutral-900">
-            <ul className="space-y-3">
-              {project.contributions.map((contribution, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                  <span className="text-neutral-600 dark:text-neutral-400">
-                    {contribution}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
-
-      {/* Seção: Desafios e Soluções */}
-      {(project.challenges || project.solutions) && (
-        <section className="mb-10 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
-          <div className="bg-neutral-50 dark:bg-neutral-800 px-6 py-3 border-b border-neutral-200 dark:border-neutral-700">
-            <h2 className="font-bold">Desafios e Soluções</h2>
-          </div>
-
-          <div className="p-6 bg-white dark:bg-neutral-900">
-            <div className="grid md:grid-cols-2 gap-6">
-              {project.challenges && (
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <LightbulbIcon className="w-5 h-5 text-amber-500" />
-                    <h3 className="font-medium">Desafios</h3>
-                  </div>
-                  <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                    {project.challenges}
-                  </p>
-                </div>
-              )}
-
-              {project.solutions && (
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <WrenchIcon className="w-5 h-5 text-blue-500" />
-                    <h3 className="font-medium">Soluções</h3>
-                  </div>
-                  <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                    {project.solutions}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Seção: Tecnologias e Ferramentas */}
-      <section className="mb-10 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
-        <div className="bg-neutral-50 dark:bg-neutral-800 px-6 py-3 border-b border-neutral-200 dark:border-neutral-700">
-          <h2 className="font-bold">Tecnologias e Ferramentas</h2>
-        </div>
-
-        <div className="p-6 bg-white dark:bg-neutral-900">
-          <div className="flex flex-wrap gap-3">
-            {project.technologies.map((tech, index) => (
-              <TechnologieIcon
-                onlyIcon={false}
-                size={34}
-                key={index}
-                technologie={tech}
-              />
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Seção: Galeria de Imagens */}
+      {/* Galeria */}
       {project.images.length > 0 && (
-      <section className="mb-10 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
-        <div className="bg-neutral-50 dark:bg-neutral-800 px-6 flex justify-between flex-wrap lg:flex-nowrap py-3 border-b border-neutral-200 dark:border-neutral-700">
-          <h2 className="font-bold">Galeria de Imagens</h2>
-          {project.isInternal && (
-            <span className="text-xs bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100 px-2 py-1">
-              Projeto Interno
-            </span>
-          )}
-        </div>
-
-        <div className="p-6 bg-white dark:bg-neutral-900">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {project.images.map((image, index) => (
-              <div
-                key={index}
-                className="border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden"
-              >
-                <div className="relative">
-                  <Image
-                    src={image.url}
-                    alt={image.title}
-                    width={500}
-                    height={300}
-                    className="w-full max-h-[300px] object-cover object-top"
-                  />
-                  {project.isInternal && (
-                    <div className="absolute inset-0 bg-neutral-900/50 flex items-center justify-center">
-                      <span className="text-white px-3 py-1 bg-neutral-900/70 text-sm rounded-md">
-                        Visualização limitada
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <p className="p-4 text-sm text-center">{image.title}</p>
+        <section className="mb-[clamp(40px,8vw,72px)] grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
+          {project.images.map((image, i) => (
+            <figure
+              key={i}
+              className="overflow-hidden rounded-panel bg-surface-sunken"
+            >
+              <div className="relative">
+                <Image
+                  src={image.url}
+                  alt={image.title}
+                  width={500}
+                  height={300}
+                  className="max-h-[300px] w-full object-cover object-top"
+                />
+                {project.isInternal && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-ink/50">
+                    <span className="rounded-control bg-ink/70 px-3 py-1 text-sm text-white">
+                      Visualização limitada
+                    </span>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <figcaption className="p-4 text-center font-mono text-[11px] text-ink-faint">
+                {image.title}
+              </figcaption>
+            </figure>
+          ))}
+        </section>
       )}
-    </div>
+
+      {/* CTA */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-7">
+        <span className="text-[clamp(18px,2.6vw,21px)] font-medium tracking-[-0.02em]">
+          Precisa de algo parecido?
+        </span>
+        <a
+          href={`mailto:${personalData.email}`}
+          className="rounded-control bg-ink px-5 py-3 text-[15px] font-medium text-white transition-colors hover:bg-accent"
+        >
+          Falar comigo
+        </a>
+      </div>
+    </article>
   );
 }
