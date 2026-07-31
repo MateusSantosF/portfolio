@@ -120,3 +120,46 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Design tokens — Portfolio v3 ───────────────────────────────────────── */
+@theme {
+  --font-sans: var(--font-inter-tight), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --color-ink: #0b0b0c;
+  --color-ink-body: #33333a;
+  --color-ink-muted: #55555e;
+  --color-ink-soft: #6b6b73;
+  --color-ink-faint: #9a9aa2;
+  --color-ink-fainter: #c2c2ca;
+
+  --color-rule: #ededf1;
+  --color-rule-strong: #e4e4e8;
+  --color-surface: #ffffff;
+  --color-surface-hover: #fafafc;
+  --color-surface-sunken: #f6f6f9;
+
+  --color-accent: #3f5efb;
+  --color-accent-tint: #e8ebff;
+
+  --radius-control: 8px;
+  --radius-panel: 10px;
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    letter-spacing: -0.011em;
+  }
+  ::selection { background: var(--color-accent-tint); color: var(--color-ink); }
+}
+
+@utility gutter { padding-inline: clamp(20px, 5vw, 72px); }
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@utility animate-fade { animation: fade 0.45s ease both; }
