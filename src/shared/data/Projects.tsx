@@ -3,6 +3,178 @@ import { IProject } from "../../features/projects/interfaces/IProject";
 
 export const projects: IProject[] = [
   {
+    id: "directluz",
+    name: "DirectLuz",
+    isHighlighted: true,
+    shortDescription:
+      "Plataforma multi-tenant de gestão de parques de iluminação pública municipal.",
+    fullDescription:
+      "O DirectLuz é a plataforma de gestão de parques de iluminação pública municipal utilizada por prefeituras em São Paulo, Paraíba e Pernambuco. Cobre inventário de ativos (postes, transformadores, medidores e telegestores), ingestão contínua de telemetria, motor de alertas, ordens de serviço e operação de campo. Em João Pessoa a operação já soma mais de 38 mil LEDs instalados e 37 mil telegestores conectados, com o pipeline processando mais de 5 milhões de mensagens de telemetria por hora.",
+    category: "PLATAFORM",
+    url: "https://app.directluz.com.br",
+    company: {
+      name: "BNP Soluções em TI",
+      url: "https://bnpsolucoes.com.br",
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+    role: "Tech Lead e Arquiteto de Software",
+    period: "Set 2025 - Presente",
+    contributions: [
+      "Definição da arquitetura da plataforma, com isolamento de dados por município",
+      "Liderança da migração do processamento de telemetria do legado para um serviço dedicado em C# .NET 8",
+      "Modelagem do pipeline de ingestão: decodificação de payload, motor de regras de alerta e persistência em lote",
+      "Frontend em React com geoprocessamento sobre mapas para milhares de ativos, dashboards operacionais e relatórios",
+      "Aplicativo React Native para as equipes de campo, com suporte a operação offline",
+      "Implantação da estratégia de observabilidade com OpenTelemetry e Grafana",
+      "Levantamento de requisitos em campo, com visitas a João Pessoa e outros municípios atendidos",
+    ],
+    challenges:
+      "O maior desafio foi sustentar a volumetria de telemetria sem degradar a operação: dezenas de milhares de dispositivos enviando dados de forma contínua, 24 horas por dia, em municípios diferentes e com bancos isolados. O componente legado não acompanhava esse crescimento, e a substituição não podia gerar janela de indisponibilidade. Somava-se a isso o requisito das equipes de campo, que trabalham em rua sem sinal confiável.",
+    solutions:
+      "O novo serviço de telemetria foi escrito em C# .NET 8 e colocado em execução paralela ao legado, permitindo migração gradual e reversível. A escrita no banco passou a usar operações em lote com upsert, o que reduziu drasticamente o custo por mensagem: hoje o serviço absorve a carga total de telegestores com uso de CPU abaixo de 5%. No mobile, adotamos uma estratégia offline-first com sincronização posterior, garantindo que a equipe consiga registrar serviços mesmo sem conectividade.",
+    technologies: [
+      "PHP",
+      ".NET",
+      "REACT",
+      "REACTNATIVE",
+      "MYSQL",
+      "MQTT",
+      "DOCKER",
+      "OPENTELEMETRY",
+      "GRAFANA",
+    ],
+    images: [],
+  },
+  {
+    id: "faceguard",
+    name: "FaceGuard",
+    isHighlighted: true,
+    shortDescription:
+      "Plataforma de videomonitoramento inteligente para smart cities e segurança pública.",
+    fullDescription:
+      "O FaceGuard é uma plataforma de videomonitoramento inteligente voltada a segurança pública e operações privadas. Integra, em um único produto, monitoramento de vídeo ao vivo e gravação, motor de visão computacional, despacho de ocorrências com boletim digital, controle de rondas e gestão de escalas, além de aplicativo para as equipes em campo. Em operação, a plataforma acompanha mais de 4.000 câmeras e processa cerca de 44 mil eventos a cada 15 minutos.",
+    category: "PLATAFORM",
+    url: "https://faceguard.me/",
+    company: {
+      name: "BNP Soluções em TI",
+      url: "https://bnpsolucoes.com.br",
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+    role: "Tech Lead e Arquiteto de Software",
+    period: "Abr 2026 - Presente",
+    contributions: [
+      "Definição da arquitetura de uma solução distribuída de alta volumetria, com processamento de vídeo e eventos em tempo real",
+      "Definição da estratégia técnica do produto: escolha de tecnologias, padrões de engenharia e critérios de qualidade do time",
+      "Coordenação das equipes de web, mobile, backend, inteligência artificial e infraestrutura",
+      "Autoria dos princípios de engenharia que orientam o code review do repositório",
+      "Implantação da estratégia de observabilidade da plataforma",
+      "Levantamento de requisitos em campo, acompanhando a operação real de centrais e equipes",
+    ],
+    challenges:
+      "Segurança pública é um domínio em que latência e disponibilidade não são negociáveis: um alerta atrasado perde o valor. O desafio central foi desenhar uma plataforma que processasse vídeo e eventos em tempo real, em volume alto e contínuo, funcionando também em cenários com conectividade instável, sem depender de hardware proprietário de um único fabricante.",
+    solutions:
+      "A arquitetura adotou uma topologia híbrida, com processamento próximo à origem do vídeo e sincronização assíncrona com a nuvem, o que mantém a operação funcionando mesmo em queda de conectividade. Os modelos de visão computacional foram desacoplados em serviços independentes, permitindo evoluir ou trocar cada capacidade sem impacto no restante do sistema. A integração com câmeras foi feita sobre protocolos abertos, decisão deliberada para eliminar dependência de fornecedor.",
+    technologies: [
+      "TYPESCRIPT",
+      "REACT",
+      "REACTNATIVE",
+      "PYTHON",
+      "POSTGRESQL",
+      "DOCKER",
+      "OPENTELEMETRY",
+      "GRAFANA",
+    ],
+    images: [],
+  },
+  {
+    id: "portal-transparencia-cultura",
+    name: "Portal da Transparência da Cultura",
+    shortDescription:
+      "Plataforma pública de acesso a contratos, convênios, editais e fomento cultural do Estado de São Paulo.",
+    fullDescription:
+      "O Portal da Transparência da Secretaria da Cultura, Economia e Indústria Criativas do Estado de São Paulo dá acesso público a dados de contratos, convênios, editais e fomento cultural. É uma plataforma de acesso amplo e sazonal, em que a exigência legal de transparência precisa ser traduzida em navegação clara e informação encontrável pelo cidadão.",
+    category: "PLATAFORM",
+    url: "https://www.transparenciacultura.sp.gov.br/",
+    company: {
+      name: "BNP Soluções em TI",
+      url: "https://bnpsolucoes.com.br",
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+    role: "Tech Lead",
+    period: "Nov 2025 - Presente",
+    contributions: [
+      "Decisões de arquitetura da solução e definição dos padrões técnicos adotados pelo time",
+      "Condução do ciclo completo de desenvolvimento, do refinamento com stakeholders à entrega em produção",
+      "Implantação da estratégia de observabilidade e de análise de uso da plataforma",
+      "Code review e coordenação da equipe de desenvolvimento",
+    ],
+    challenges:
+      "O acesso a um portal de transparência é sazonal e imprevisível: cresce em picos ligados a publicações e prazos de editais. Manter disponibilidade e tempo de resposta nesses momentos, com custo previsível, foi o principal ponto de atenção da arquitetura.",
+    solutions:
+      "A solução foi desenhada priorizando disponibilidade e desempenho sob carga variável, com esteira de entrega contínua e observabilidade desde o início, o que permite identificar degradação antes que ela afete o cidadão.",
+    technologies: ["NEXTJS", "TYPESCRIPT", ".NET", "SQLSERVER", "AZURE"],
+    images: [],
+  },
+  {
+    id: "cedoc-condephaat",
+    name: "CEDOC - Centro de Documentação do CONDEPHAAT",
+    shortDescription:
+      "Digitalização e acesso público ao acervo documental do patrimônio cultural paulista.",
+    fullDescription:
+      "O CEDOC é o Centro de Documentação do CONDEPHAAT, conselho responsável pela preservação do patrimônio histórico, arquitetônico, arqueológico e cultural do Estado de São Paulo. A plataforma digitaliza e abre ao público um acervo de mais de 5.000 itens, entre processos de tombamento, mapas, plantas, fotografias e publicações, em parceria com o Arquivo Público do Estado de São Paulo.",
+    category: "PLATAFORM",
+    url: "https://app-cedoc-public-prod.azurewebsites.net/",
+    company: {
+      name: "BNP Soluções em TI",
+      url: "https://bnpsolucoes.com.br",
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+    role: "Tech Lead",
+    period: "Jun 2025 - Jan 2026",
+    contributions: [
+      "Definição da arquitetura da solução, com CMS headless para a curadoria do acervo",
+      "Modelagem do domínio documental, contemplando tipologias heterogêneas de documento histórico",
+      "Levantamento de requisitos junto ao cliente e reuniões periódicas de alinhamento técnico",
+      "Coordenação da equipe e responsabilidade pelo ciclo completo até a entrega em produção",
+      "Implantação da estratégia de observabilidade da plataforma",
+    ],
+    challenges:
+      "O acervo do CONDEPHAAT reúne tipologias muito diferentes entre si: um processo de tombamento não se descreve da mesma forma que uma planta arquitetônica ou uma fotografia histórica. O desafio foi modelar um domínio capaz de representar essa diversidade sem engessar o trabalho de curadoria de quem alimenta a plataforma.",
+    solutions:
+      "Adotamos um CMS headless como camada de curadoria, com tipos de conteúdo flexíveis o suficiente para acomodar as diferentes tipologias documentais mantendo consistência de metadados. Isso permitiu à equipe do arquivo cadastrar e evoluir o acervo sem depender do time de desenvolvimento a cada novo tipo de documento.",
+    technologies: ["NEXTJS", "TYPESCRIPT", "STRAPI", "NODEJS", "SQLSERVER", "AZURE"],
+    images: [],
+  },
+  {
+    id: "clube-beneficios-agenda-viva-sp",
+    name: "Clube de Benefícios - Agenda Viva SP",
+    shortDescription:
+      "Plataforma de benefícios e parcerias culturais para o público da Agenda Viva SP.",
+    fullDescription:
+      "O Clube de Benefícios da Agenda Viva SP conecta o público cultural paulista a vantagens e parcerias exclusivas, ampliando o acesso à cultura no Estado. Concebido em conjunto com a Secretaria da Cultura, Economia e Indústria Criativas e a Organização Social Amigos da Arte, o produto se integra ao ecossistema da Agenda Viva SP, reaproveitando identidade e base de usuários já existentes.",
+    category: "PLATAFORM",
+    url: "https://clube.agendavivasp.com.br",
+    company: {
+      name: "BNP Soluções em TI",
+      url: "https://bnpsolucoes.com.br",
+      icon: <Building2 className="w-5 h-5 text-blue-600" />,
+    },
+    role: "Tech Lead e Arquiteto de Software",
+    period: "Out 2025 - Presente",
+    contributions: [
+      "Concepção da solução desde o início, participando da definição do produto junto aos stakeholders",
+      "Definição da arquitetura e da integração com o ecossistema da Agenda Viva SP",
+      "Coordenação da equipe de desenvolvimento e responsabilidade pelo ciclo completo até produção",
+      "Observabilidade implantada desde o primeiro deploy",
+    ],
+    challenges:
+      "O Clube nasceu como produto novo, mas não podia parecer um sistema à parte: precisava herdar a identidade e a base de usuários da Agenda Viva SP sem criar um segundo cadastro nem duplicar regras de negócio já existentes.",
+    solutions:
+      "A arquitetura foi desenhada para reutilizar a identidade e a autenticação do ecossistema Agenda Viva SP, mantendo o Clube como um domínio próprio e evolutivo. Isso reduziu o atrito de entrada para o usuário final e evitou duplicação de responsabilidades entre os dois produtos.",
+    technologies: ["NEXTJS", "TYPESCRIPT", ".NET", "MONGODB"],
+    images: [],
+  },
+  {
     id: "agenda-viva-sp",
     name: "Agenda Viva SP",
     isHighlighted: true,

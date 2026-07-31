@@ -17,7 +17,16 @@ export type TTechnologie =
   | "PRISMA"
   | "DOCKER"
   | "FASTAPI"
-  | "AZFUNCTIONS";
+  | "AZFUNCTIONS"
+  | "PHP"
+  | "REACTNATIVE"
+  | "POSTGRESQL"
+  | "MYSQL"
+  | "STRAPI"
+  | "GRAFANA"
+  | "OPENTELEMETRY"
+  | "MQTT"
+  | "AZURE";
 
 export type TTechnologieIcon = {
   icon: {

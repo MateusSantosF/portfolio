@@ -15,8 +15,15 @@ import {
   SiShadcnui,
   SiDocker,
   SiFastapi,
+  SiPhp,
+  SiPostgresql,
+  SiMysql,
+  SiStrapi,
+  SiGrafana,
+  SiOpentelemetry,
+  SiMqtt,
 } from "react-icons/si";
-import { TbBrandCSharp } from "react-icons/tb";
+import { TbBrandCSharp, TbBrandReactNative, TbBrandAzure } from "react-icons/tb";
 import { DiMsqlServer } from "react-icons/di";
 
 import { TTechnologie, TTechnologieIcon } from "../interfaces/ITechnologies";
@@ -165,5 +172,77 @@ export const TechnologiesMap: Record<TTechnologie, TTechnologieIcon> = {
     },
     url: "https://fastapi.tiangolo.com/",
     name: "FastAPI",
+  },
+  PHP: {
+    icon: {
+      source: <SiPhp size={18} className="text-indigo-500" />,
+      alt: "PHP",
+    },
+    url: "https://www.php.net/",
+    name: "PHP",
+  },
+  REACTNATIVE: {
+    icon: {
+      source: <TbBrandReactNative size={18} className="text-blue-400" />,
+      alt: "React Native",
+    },
+    url: "https://reactnative.dev/",
+    name: "React Native",
+  },
+  POSTGRESQL: {
+    icon: {
+      source: <SiPostgresql size={18} className="text-blue-700" />,
+      alt: "PostgreSQL",
+    },
+    url: "https://www.postgresql.org/",
+    name: "PostgreSQL",
+  },
+  MYSQL: {
+    icon: {
+      source: <SiMysql size={18} className="text-sky-700" />,
+      alt: "MySQL",
+    },
+    url: "https://www.mysql.com/",
+    name: "MySQL",
+  },
+  STRAPI: {
+    icon: {
+      source: <SiStrapi size={18} className="text-violet-600" />,
+      alt: "Strapi",
+    },
+    url: "https://strapi.io/",
+    name: "Strapi",
+  },
+  GRAFANA: {
+    icon: {
+      source: <SiGrafana size={18} className="text-orange-500" />,
+      alt: "Grafana",
+    },
+    url: "https://grafana.com/",
+    name: "Grafana",
+  },
+  OPENTELEMETRY: {
+    icon: {
+      source: <SiOpentelemetry size={18} className="text-indigo-400" />,
+      alt: "OpenTelemetry",
+    },
+    url: "https://opentelemetry.io/",
+    name: "OpenTelemetry",
+  },
+  MQTT: {
+    icon: {
+      source: <SiMqtt size={18} className="text-fuchsia-600" />,
+      alt: "MQTT",
+    },
+    url: "https://mqtt.org/",
+    name: "MQTT",
+  },
+  AZURE: {
+    icon: {
+      source: <TbBrandAzure size={18} className="text-blue-500" />,
+      alt: "Microsoft Azure",
+    },
+    url: "https://azure.microsoft.com/",
+    name: "Azure",
   },
 };
