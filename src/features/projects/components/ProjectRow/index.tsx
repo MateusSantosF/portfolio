@@ -6,15 +6,12 @@ import { cloneElement } from "react";
 
 type ProjectRowProps = {
   project: IProject;
-  /** Índice 1-based exibido como "01", "02"… Omitido nos destaques da home. */
-  index?: number;
   /** `top` na listagem completa, `bottom` nos destaques da home. */
   rule?: "top" | "bottom";
 };
 
 export default function ProjectRow({
   project,
-  index,
   rule = "bottom",
 }: ProjectRowProps) {
   const { label } = CategoriesMap[project.category];
@@ -27,18 +24,13 @@ export default function ProjectRow({
       }`}
     >
       <span className="flex flex-wrap items-baseline gap-3">
-        {index !== undefined && (
-          <span className="font-mono text-[11px] text-ink-fainter">
-            {String(index).padStart(2, "0")}
-          </span>
-        )}
         <span className="text-[clamp(19px,3.2vw,23px)] font-medium tracking-[-0.02em] text-ink">
           {project.name}
         </span>
-        <span className="font-mono text-[11px] text-ink-faint">{label}</span>
+        <span className="font-mono text-xs text-ink-faint">{label}</span>
       </span>
 
-      <span className="max-w-[46em] text-[15px] leading-[1.6] text-ink-muted">
+      <span className="max-w-[46em] text-base leading-[1.65] text-ink-muted">
         {project.shortDescription}
       </span>
 

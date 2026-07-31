@@ -47,7 +47,7 @@ const CERTIFICATIONS =
 
 export default function About() {
   return (
-    <div className="animate-fade gutter pb-[clamp(64px,12vh,120px)] pt-[clamp(40px,8vh,96px)]">
+    <div className="animate-fade shell pb-[clamp(64px,12vh,120px)] pt-[clamp(40px,8vh,96px)]">
       {/* Intro */}
       <div className="flex max-w-[40em] flex-col gap-5">
         <p className="font-mono text-xs text-ink-faint">Sobre</p>
