@@ -306,6 +306,7 @@ export default async function ProjectDetails({ params }: Props) {
       </section>
 
       {/* Seção: Galeria de Imagens */}
+      {project.images.length > 0 && (
       <section className="mb-10 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
         <div className="bg-neutral-50 dark:bg-neutral-800 px-6 flex justify-between flex-wrap lg:flex-nowrap py-3 border-b border-neutral-200 dark:border-neutral-700">
           <h2 className="font-bold">Galeria de Imagens</h2>
@@ -345,6 +346,7 @@ export default async function ProjectDetails({ params }: Props) {
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 }
